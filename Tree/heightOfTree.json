@@ -1,0 +1,37 @@
+function findHeight(root){
+let height = 0;
+if(!root)
+	return height;
+let arr = [];
+arr.unshift(root);
+arr.unshift(null);
+while(arr.length){
+let cur = arr.pop();
+if(cur === null){
+	if(arr.length){
+		arr.unshift(null);
+	}
+	height++;
+} else{
+if(cur.left)
+	arr.unshift(cur.left);
+if(cur.right)
+	arr.unshift(cur.right);
+}
+}
+return height;
+}
+
+function diameter(root, height){
+if(!root){
+height.h=0;
+return 0;
+}
+let lh = {h:0};
+let rh = {h:0};
+let ld = diameter(root.left, lh);
+let rd = diameter(root.right, rh);
+height.h= Math.max(lh.h,rh.h)+1;
+
+return Math.max(lh.h + rh.h + 1, Math.max(ld,rd));
+}
